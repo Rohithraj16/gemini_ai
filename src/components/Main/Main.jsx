@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Main.css";
 import { assets } from "../../assets/assets";
 import { Context } from "../../context/context";
+
 const Main = () => {
 	const {
 		onSent,
@@ -12,6 +13,14 @@ const Main = () => {
 		setInput,
 		input,
 	} = useContext(Context);
+
+	// Add event handler for Enter key press
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter" && input) {
+			onSent();
+		}
+	};
+
 	return (
 		<div className="main">
 			<div className="nav">
@@ -74,6 +83,7 @@ const Main = () => {
 							value={input}
 							type="text"
 							placeholder="Enter a prompt here"
+							onKeyDown={handleKeyDown}
 						/>
 						<div>
 							<img src={assets.gallery_icon} alt="" />
